@@ -1,0 +1,29 @@
+{
+  "name": "autonomy-test-01",
+  "version": "1.0.0",
+  "description": "Secure-by-default Node.js/Express application with defense-in-depth security controls (helmet, CORS allowlist, rate limiting, input validation, HTTPS).",
+  "main": "src/app.js",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=22 <25"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "jest",
+    "audit": "npm audit --audit-level=high",
+    "lint": "eslint src"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "helmet": "^8.3.0",
+    "cors": "^2.8.6",
+    "express-rate-limit": "^8.5.2",
+    "express-validator": "^7.3.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.1.1",
+    "eslint": "^9.20.0"
+  }
+}
