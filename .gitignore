@@ -1,0 +1,61 @@
+# .gitignore
+# ---------------------------------------------------------------------------
+# Security-hardening baseline for the net-new Node.js/Express application.
+#
+# Purpose: guarantee that installed dependencies, local environment files, and
+# TLS/cryptographic material NEVER enter version control. This directly
+# enforces the "No secrets in version control" requirement of the security
+# hardening plan (AAP Sections 0.6.1, 0.9.1, and 0.11.2).
+#
+# Format: plain text, one pattern per line; comments are prefixed with '#'.
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Node.js dependencies
+# ---------------------------------------------------------------------------
+# Installed packages are restored deterministically from the committed
+# package-lock.json via `npm ci`, so the tree itself is never committed.
+# NOTE: package-lock.json is intentionally NOT ignored — it must be committed
+# for reproducible, auditable installs (`npm ci` / `npm audit`).
+node_modules/
+
+# ---------------------------------------------------------------------------
+# Environment files (secrets / local configuration)
+# ---------------------------------------------------------------------------
+# Never commit real secrets or machine-local configuration. The broad
+# `.env.*` rule catches every local variant (e.g. .env.local, .env.production,
+# .env.development.local). The secret-free template `.env.example` IS part of
+# the repository, so it is explicitly re-included via the negation below.
+.env
+.env.*
+!.env.example
+
+# ---------------------------------------------------------------------------
+# TLS / cryptographic material (HTTPS keys and certificates)
+# ---------------------------------------------------------------------------
+# Private keys and certificates are provisioned out-of-band at deploy time
+# (paths supplied via TLS_KEY_PATH / TLS_CERT_PATH) and must never be stored
+# in the repository.
+*.pem
+*.key
+*.crt
+*.cert
+/certs
+/certs/
+
+# ---------------------------------------------------------------------------
+# Logs
+# ---------------------------------------------------------------------------
+npm-debug.log*
+logs/
+*.log
+
+# ---------------------------------------------------------------------------
+# Test coverage reports (jest)
+# ---------------------------------------------------------------------------
+coverage/
+
+# ---------------------------------------------------------------------------
+# OS / editor cruft
+# ---------------------------------------------------------------------------
+.DS_Store
